@@ -5,23 +5,44 @@
         <p class="txt-sm text-slate-100 mb-4">
             {!! nl2br(e($job->description)) !!}
           </p>
-
-
-          @can('apply', $job)
-            <x-link-button :href="route('job.application.create', $job)">Apply Now</x-link-button>
+        
+        @auth
+            @can('apply', $job)
+                @if ($job->employer_id === auth()->user()->employer->id)
+                    <div class="text-center text-medium font-medium text-slate-400">
+                        You cant apply to a job you posted.
+                    </div>
+                @elseif ($job->employer_id !== auth()->user()->employer->id)
+                    <x-link-button :href="route('job.application.create', $job)">Apply Now</x-link-button>
+                @endif
+                
             @else
-
-            @auth
+                <div class="text-center text-medium font-medium text-slate-400">
+                    You already applied to this job.
+                </div>
+            @endcan
+        @else
             <div class="text-center text-medium font-medium text-slate-400">
-                You already applied to this job.
+                Please <a class="text-slate-200" href="{{ route('auth.create')}}">Sign In</a> to apply for this job.
             </div>
-                @else
+        @endauth
+
+        {{-- @can('apply', $job)
+            <x-link-button :href="route('job.application.create', $job)">Apply Now</x-link-button>
+        @else
+            @auth
+                <div class="text-center text-medium font-medium text-slate-400">
+                    You already applied to this job.
+                </div>
+            @else
                 <div class="text-center text-medium font-medium text-slate-400">
                     Please <a class="text-slate-200" href="{{ route('auth.create')}}">Sign In</a> to apply for this job.
                 </div>
-            @endauth
-           
-          @endcan
+            @endauth           
+        @endcan --}}
+
+
+
     </x-job-card>
 
     <x-card class="mg-4 text-slate-100">

@@ -18,7 +18,7 @@
 
   </x-navbar>
 
-        <div x-data="{ flash:true }" class="p-16">
+        <div x-data="{ flash:true }" class="p-20 sm:p-20">
         <div class="max-w-4xl">
 
             @if(session()->has('success'))

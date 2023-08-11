@@ -2,7 +2,7 @@
 
     
     
-    <div class="mb-4 grid grid-cols-2 rounded-2-xl">
+    <div class="mb-4 grid grid-cols-1 rounded-2-xl">
     <x-card class="rounded-none">
         
         <form action="{{route('auth.store')}}" method="POST">
@@ -41,8 +41,6 @@
            
         </form>
     </x-card>
-    <div class="h-auto bg-cover opacity-75 bg-gradient-to-br from-slate-700 to-gray-500">
-    </div>
 </div>
 
 
